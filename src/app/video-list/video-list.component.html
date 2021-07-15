@@ -1,5 +1,7 @@
 <ag-grid-angular
   class="ag-theme-alpine"
-  [rowData]="rowData$ | async"
+  [gridOptions]="gridOptions"
+  [rowData]="rowData$ | ngrxPush"
   [columnDefs]="columnDefs">
 </ag-grid-angular>
+

@@ -1,3 +1,12 @@
+export interface ApiData {
+  kind: string;
+  etag: string;
+  nextPageToken: string;
+  regionCode: string;
+  pageInfo: IPageInfo;
+  items: VideoItemFromApi[];
+}
+
 export interface IVideo {
   etag: string,
   id: IVideoId,
@@ -5,10 +14,24 @@ export interface IVideo {
   snippet: ISnippet,
 }
 
+export interface VideoListItem {
+  checkbox?: boolean;
+  thumbnail: IThumbnailParams;
+  publishedOn: string;
+  videoTitle: IVideoTitle;
+  description: string;
+}
+
+export interface IVideoTitle {
+  title: string;
+  videoId: string;
+}
+
 export interface ISnippet {
   channelId: string,
   channelTitle: string,
   description: string,
+  title: string,
   liveBroadcastContent: string,
   publishTime: string,
   publishedAt: string,
@@ -30,4 +53,16 @@ export interface IThumbnailParams {
 export interface IVideoId {
   kind: string,
   videoId: string
+}
+
+export interface IPageInfo {
+  totalResults: number;
+  resultsPerPage: number;
+}
+
+export interface VideoItemFromApi {
+  kind?: 'youtube#searchResult';
+  etag: string;
+  id: IVideoId;
+  snippet: ISnippet;
 }

@@ -15,7 +15,7 @@ export const reducers: ActionReducerMap<State, Actions> = {
 
 export const getDataState = (state: State) => state.grid;
 
-export const selectVideoListData = createSelector(
+export const selectVideosList = createSelector(
   getDataState,
   (state: DataState) => state.videoData
 );
