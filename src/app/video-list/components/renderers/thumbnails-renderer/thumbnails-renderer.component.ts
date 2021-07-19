@@ -1,7 +1,7 @@
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { Component} from '@angular/core';
 
-import { IThumbnailParams } from '../../../shared /interfaces';
+import { IThumbnailParams } from '../../../../shared /interfaces';
 import { ICellRendererParams } from 'ag-grid-community';
 
 @Component({

@@ -1,0 +1,9 @@
+<p>
+  Selection Mode:
+  <mat-button-toggle-group
+    aria-label="Selection Mode"
+    (change)="selectionMode$.next($event.value)">
+    <mat-button-toggle [value]="true">On</mat-button-toggle>
+    <mat-button-toggle [value]="false">Off</mat-button-toggle>
+  </mat-button-toggle-group>
+</p>
