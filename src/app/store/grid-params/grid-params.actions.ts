@@ -1,5 +1,5 @@
-import {createAction, props} from "@ngrx/store";
-import {IGridColumn} from "./grid-params.entity";
+import { createAction, props } from '@ngrx/store';
+import { IGridColumn } from './grid-params.entity';
 
 export const GridParamsAddColumnDefs = createAction(
   "[Grid Params] Add Columns Defs",
@@ -15,13 +15,7 @@ export const GridParamsRemoveCheckboxColumn = createAction(
   "[Grid Params] Remove Checkbox Column"
 );
 
-// {
-//   field: 'checkbox',
-//     headerName: '',
-//   minWidth: '50',
-//   maxWidth: '50',
-//   headerComponentFramework: HeaderCheckboxComponent,
-//   checkboxSelection: true,
-//   suppressMenu: true,
-//   headerValueGetter: () => this.rowDataLength,
-//   aggFunc: 'sum'
+export const GridParamsChangeGeneralCheckbox = createAction(
+  "[Grid Params] Change General Checkbox",
+  props<{ generalCheckboxValue: boolean }>()
+);

@@ -12,11 +12,10 @@ import 'ag-grid-enterprise';
 import {CustomToggleButtonComponent} from "./components/toolbar/custom-toggle-button/custom-toggle-button.component";
 import {
   GridParamsAddCheckboxColumn,
-  GridParamsAddColumnDefs,
+  GridParamsChangeGeneralCheckbox,
   GridParamsRemoveCheckboxColumn
 } from "../store/grid-params/grid-params.actions";
 import {CheckboxComponent} from "./components/checkbox/checkbox.component";
-import {ToggleParams} from "./components/toolbar/custom-toggle-button/custom-toggle-button.config";
 
 
 @Component({
@@ -34,6 +33,7 @@ export class VideoListComponent implements OnInit {
     },
     suppressRowClickSelection: true,
     rowSelection: 'multiple',
+    applyColumnDefOrder: true,
     statusBar: {
       statusPanels: [
         {
@@ -59,14 +59,6 @@ export class VideoListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.store.dispatch(GridParamsAddColumnDefs({
-    //   columnDefs: [
-    //     { field: 'thumbnail', headerName: '', cellRendererFramework: ThumbnailsRendererComponent },
-    //     { field: 'publishedOn', cellRendererFramework: PublishedAtRendererComponent },
-    //     { field: 'videoTitle', cellRendererFramework: TitleRendererComponent },
-    //     { field: 'description', cellRendererFramework: DescriptionRendererComponent }
-    //   ]
-    // }));
     this.columnDefs$ = this.store.select(selectColumnDefs);
     this.rowData$ = this.store.select(selectVideoDataSuccess);
   }
@@ -79,7 +71,7 @@ export class VideoListComponent implements OnInit {
     const selectionMode$ = gridApi.getStatusPanel("customToggleButtonComponent")?.getFrameworkComponentInstance().selectionMode$;
     selectionMode$?.subscribe((mode: string) => {
       mode ? this.addCheckboxColumn() : this.removeCheckboxColumn();
-    })
+    });
   }
 
   addCheckboxColumn(): void {
@@ -100,4 +92,8 @@ export class VideoListComponent implements OnInit {
     this.store.dispatch(GridParamsRemoveCheckboxColumn());
   }
 
+  onSelectionChanged(event: any): void {
+    const isAllCheckboxesSelected: boolean = event.api.getSelectedRows().length === event.api.getDisplayedRowCount();
+    this.store.dispatch(GridParamsChangeGeneralCheckbox({generalCheckboxValue: isAllCheckboxesSelected}))
+  }
 }

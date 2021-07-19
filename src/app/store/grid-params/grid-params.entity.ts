@@ -12,7 +12,8 @@ export interface IGridColumn {
 
 export interface GridParamsState {
   columnDefs: any[],
-  checkboxColumn: IGridColumn
+  checkboxColumn: IGridColumn,
+  generalCheckboxValue: boolean
 }
 
 

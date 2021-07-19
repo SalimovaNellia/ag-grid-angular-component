@@ -3,6 +3,7 @@
   [gridOptions]="gridOptions"
   [rowData]="rowData$ | async"
   [columnDefs]="columnDefs$ | async"
+  (selectionChanged)="onSelectionChanged($event)"
   (gridReady)="onGridReady($event)">
 </ag-grid-angular>
 

@@ -1,6 +1,6 @@
 import * as gridParamsActions from './grid-params.actions';
-import {Action, createReducer, on} from "@ngrx/store";
-import {GridParamsState, IGridColumn} from "./grid-params.entity";
+import { Action, createReducer, on} from "@ngrx/store";
+import { GridParamsState} from "./grid-params.entity";
 import {ThumbnailsRendererComponent} from "../../video-list/components/renderers/thumbnails-renderer/thumbnails-renderer.component";
 import {PublishedAtRendererComponent} from "../../video-list/components/renderers/published-at-renderer/published-at-renderer.component";
 import {TitleRendererComponent} from "../../video-list/components/renderers/title-renderer/title-renderer.component";
@@ -21,9 +21,9 @@ export const GRID_PARAMS_INITIAL_STATE = {
     headerComponentFramework: null,
     checkboxSelection: true,
     suppressMenu: true
-  }
+  },
+  generalCheckboxValue: false
 }
-
 
 const featureReducer = createReducer<GridParamsState>(
   GRID_PARAMS_INITIAL_STATE,
@@ -42,6 +42,10 @@ const featureReducer = createReducer<GridParamsState>(
     ...state,
     columnDefs: state.columnDefs.filter((col) => col.field !== "checkbox")
   })),
+  on(gridParamsActions.GridParamsChangeGeneralCheckbox, (state, { generalCheckboxValue }) => ({
+    ...state,
+    generalCheckboxValue: generalCheckboxValue
+  }))
 );
 
 export function gridParamsReducer(
