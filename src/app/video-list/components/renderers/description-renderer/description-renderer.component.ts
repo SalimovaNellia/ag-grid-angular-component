@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {ICellRendererAngularComp} from "ag-grid-angular";
-import {ICellRendererParams} from "ag-grid-community";
+import { ICellRendererAngularComp } from 'ag-grid-angular';
+import { ICellRendererParams } from 'ag-grid-community';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-description-renderer',

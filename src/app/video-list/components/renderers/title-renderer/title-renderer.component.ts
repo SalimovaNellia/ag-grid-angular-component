@@ -9,12 +9,13 @@ import { Component } from '@angular/core';
 })
 export class TitleRendererComponent implements ICellRendererAngularComp {
 
+  public baseLink: string = 'https://www.youtube.com/watch?v=';
   public videoTitle: string;
   public videoLink: string;
 
   agInit(params: ICellRendererParams): void {
     this.videoTitle = params.value.title;
-    this.videoLink = params.value.videoId;
+    this.videoLink = this.baseLink + params.value.videoId;
   }
 
   refresh(params: any): boolean {
