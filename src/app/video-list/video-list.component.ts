@@ -1,27 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Self} from '@angular/core';
 import { GridOptions } from 'ag-grid-community';
-import { Store} from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { VideoListItem } from '../shared /interfaces';
 import {IGridColumn} from "../store/grid-params/grid-params.entity";
-import {selectColumnDefs} from "../store/grid-params/grid-params.selectors";
-import {selectVideoDataSuccess} from "../store/data/data.selectors";
-import {AppState} from "../store/root/root.entity";
 import 'ag-grid-enterprise';
 import {CustomToggleButtonComponent} from "./components/toolbar/custom-toggle-button/custom-toggle-button.component";
-import {
-  GridParamsAddCheckboxColumn,
-  GridParamsChangeGeneralCheckbox,
-  GridParamsRemoveCheckboxColumn
-} from "../store/grid-params/grid-params.actions";
-import {CheckboxComponent} from "./components/checkbox/checkbox.component";
+
+import {VideoListService} from "./services/video-list.service";
 
 
 @Component({
   selector: 'app-video-list',
   templateUrl: './video-list.component.html',
-  styleUrls: ['./video-list.component.scss']
+  styleUrls: ['./video-list.component.scss'],
+  providers: [VideoListService]
 })
 export class VideoListComponent implements OnInit {
 
@@ -55,12 +48,12 @@ export class VideoListComponent implements OnInit {
   columnDefs$: Observable<IGridColumn[]>;
   rowData$: Observable<VideoListItem[] | null>;
 
-  constructor(private store: Store<AppState>) {
+  constructor(@Self() private videoListService: VideoListService) {
   }
 
   ngOnInit(): void {
-    this.columnDefs$ = this.store.select(selectColumnDefs);
-    this.rowData$ = this.store.select(selectVideoDataSuccess);
+    this.columnDefs$ = this.videoListService.selectColumnDefFromStore();
+    this.rowData$ = this.videoListService.selectRowDataFromStore();
   }
 
   onGridReady(event: any) {
@@ -75,25 +68,15 @@ export class VideoListComponent implements OnInit {
   }
 
   addCheckboxColumn(): void {
-    this.store.dispatch(GridParamsAddCheckboxColumn({
-        checkboxColumn: {
-          field: 'checkbox',
-          headerName: '',
-          minWidth: '50',
-          maxWidth: '50',
-          headerComponentFramework: CheckboxComponent,
-          checkboxSelection: true,
-          suppressMenu: true,
-        }
-      }));
+    this.videoListService.dispatchGridParamsAddCheckboxColumn();
   }
 
   removeCheckboxColumn(): void {
-    this.store.dispatch(GridParamsRemoveCheckboxColumn());
+    this.videoListService.dispatchGridParamsRemoveCheckboxColumn();
   }
 
   onSelectionChanged(event: any): void {
     const isAllCheckboxesSelected: boolean = event.api.getSelectedRows().length === event.api.getDisplayedRowCount();
-    this.store.dispatch(GridParamsChangeGeneralCheckbox({generalCheckboxValue: isAllCheckboxesSelected}))
+    this.videoListService.dispatchChangeGeneralCheckbox(isAllCheckboxesSelected);
   }
 }
