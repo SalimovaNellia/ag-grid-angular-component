@@ -9,7 +9,7 @@ describe('TitleRendererComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ TitleRendererComponent ]
-    })
+    }).overrideTemplate(TitleRendererComponent, "<span></span>")
     .compileComponents();
   });
 
@@ -21,5 +21,9 @@ describe('TitleRendererComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it("refresh should return false", () => {
+    expect(component.refresh()).toBeFalsy();
   });
 });
