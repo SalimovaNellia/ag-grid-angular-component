@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { INITIAL_APP_STATE } from '../../store/root/root.config';
 import { VideoListService } from './video-list.service';
-import { AppState } from "../../store/root/root.entity";
+import { AppState } from '../../store/root/root.entity';
 
 
 describe('VideoListService', () => {

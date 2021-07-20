@@ -1,4 +1,4 @@
-import {checkIsAllRowsSelected} from "./is-all-rows-selected.function";
+import { checkIsAllRowsSelected } from './is-all-rows-selected.function';
 
 const mockResults = [true, false];
 const incomingValuesEquals = {

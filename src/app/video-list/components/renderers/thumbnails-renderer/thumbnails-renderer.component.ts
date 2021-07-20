@@ -15,11 +15,11 @@ export class ThumbnailsRendererComponent implements ICellRendererAngularComp {
 
   constructor() { }
 
-  agInit(params: ICellRendererParams): void {
+  public agInit(params: ICellRendererParams): void {
     this.thumbnailParams = params.value;
   }
 
-  refresh(params: any): boolean {
+  public refresh(): boolean {
     return false;
   }
 

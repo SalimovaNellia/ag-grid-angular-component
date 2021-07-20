@@ -1,14 +1,14 @@
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import {catchError, map, startWith, switchMap, tap} from "rxjs/operators";
-import { of, OperatorFunction } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { of } from 'rxjs';
 
-import { VideoListItem } from "../../shared /interfaces";
+import { transformApiDataToRowData } from '../../video-list/utils/tranform-api-data.pipe';
 import { DataService } from '../../shared /services/data.service';
+import { VideoListItem } from '../../shared /interfaces';
+import { AppState } from '../root/root.entity';
 import * as dataActions from './data.actions';
-import {AppState} from "../root/root.entity";
-import {transformApiDataToRowData} from "../../video-list/utils/tranform-api-data.pipe";
 
 @Injectable()
 export class DataEffects {

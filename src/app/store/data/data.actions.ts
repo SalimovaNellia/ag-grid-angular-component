@@ -1,6 +1,6 @@
-import {Action, createAction, props} from "@ngrx/store";
+import { createAction, props} from '@ngrx/store';
 
-import { VideoListItem } from "../../shared /interfaces";
+import { VideoListItem } from '../../shared /interfaces';
 
 
 export const VideoDataGetData = createAction(

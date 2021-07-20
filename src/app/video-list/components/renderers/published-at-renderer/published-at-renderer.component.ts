@@ -9,13 +9,13 @@ import { Component } from '@angular/core';
 })
 export class PublishedAtRendererComponent implements ICellRendererAngularComp {
 
-  public publishedAt: string;
+  public publishedOn: string;
 
-  agInit(params: ICellRendererParams): void {
-    this.publishedAt = params.value;
+  public agInit(params: ICellRendererParams): void {
+    this.publishedOn = params.value;
   }
 
-  refresh(): boolean {
+  public refresh(): boolean {
     return false;
   }
 

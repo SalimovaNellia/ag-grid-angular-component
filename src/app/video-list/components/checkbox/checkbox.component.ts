@@ -4,8 +4,8 @@ import { Component, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { selectGeneralCheckboxValue } from '../../../store/grid-params/grid-params.selectors';
+import { checkIsAllRowsSelected } from './utils/is-all-rows-selected.function';
 import { AppState } from '../../../store/root/root.entity';
-import {checkIsAllRowsSelected} from "./utils/is-all-rows-selected.function";
 
 
 @Component({
@@ -15,18 +15,18 @@ import {checkIsAllRowsSelected} from "./utils/is-all-rows-selected.function";
 })
 export class CheckboxComponent implements IHeaderAngularComp, OnInit {
 
-  allRowsSelectedToggle = false;
-  gridApi: GridApi;
+  public allRowsSelectedToggle = false;
+  public gridApi: GridApi;
 
-  constructor(private store: Store<AppState>) {}
+  public constructor(private store: Store<AppState>) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.store.select(selectGeneralCheckboxValue).subscribe(value => {
       this.allRowsSelectedToggle = value;
     });
   }
 
-  agInit(params: IHeaderParams): void {
+  public agInit(params: IHeaderParams): void {
     this.gridApi = params.api;
     this.allRowsSelectedToggle =
       checkIsAllRowsSelected(
@@ -35,11 +35,11 @@ export class CheckboxComponent implements IHeaderAngularComp, OnInit {
       )
   }
 
-  refresh(params: IHeaderParams): boolean {
+  public refresh(params: IHeaderParams): boolean {
     return false;
   }
 
-  onChange(event: any) {
+  public onChange(event: any) {
     event ? this.gridApi.selectAll() : this.gridApi.deselectAll();
   }
 }

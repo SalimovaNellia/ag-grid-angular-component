@@ -1,6 +1,7 @@
 import { createSelector } from '@ngrx/store';
-import {AppState} from "../root/root.entity";
-import {GridParamsState} from "./grid-params.entity";
+
+import { AppState } from '../root/root.entity';
+import { GridParamsState } from "./grid-params.entity";
 
 
 export const getGridParams = (state: AppState) => state.gridParams;

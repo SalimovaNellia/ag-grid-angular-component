@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import {selectColumnDefs} from "../../store/grid-params/grid-params.selectors";
-import {Store} from "@ngrx/store";
-import {AppState} from "../../store/root/root.entity";
-import {Observable} from "rxjs";
-import {IGridColumn} from "../../store/grid-params/grid-params.entity";
-import {VideoListItem} from "../../shared /interfaces";
-import {selectVideoDataSuccess} from "../../store/data/data.selectors";
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { selectColumnDefs } from '../../store/grid-params/grid-params.selectors';
+import { CheckboxComponent } from '../components/checkbox/checkbox.component';
+import { selectVideoDataSuccess } from '../../store/data/data.selectors';
+import { IGridColumn} from '../../store/grid-params/grid-params.entity';
+import { AppState } from '../../store/root/root.entity';
+import { VideoListItem } from '../../shared /interfaces';
 import {
-  GridParamsAddCheckboxColumn,
   GridParamsChangeGeneralCheckbox,
-  GridParamsRemoveCheckboxColumn
-} from "../../store/grid-params/grid-params.actions";
-import {CheckboxComponent} from "../components/checkbox/checkbox.component";
+  GridParamsRemoveCheckboxColumn,
+  GridParamsAddCheckboxColumn
+} from '../../store/grid-params/grid-params.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -20,23 +21,23 @@ export class VideoListService {
 
   constructor(private store: Store<AppState>) { }
 
-  selectColumnDefFromStore(): Observable<IGridColumn[]> {
+  public selectColumnDefFromStore(): Observable<IGridColumn[]> {
     return this.store.select(selectColumnDefs);
   }
 
-  selectRowDataFromStore(): Observable<VideoListItem[] | null> {
+  public selectRowDataFromStore(): Observable<VideoListItem[] | null> {
     return this.store.select(selectVideoDataSuccess);
   }
 
-  dispatchChangeGeneralCheckbox(isAllCheckboxesSelected: boolean): void {
+  public dispatchChangeGeneralCheckbox(isAllCheckboxesSelected: boolean): void {
     this.store.dispatch(GridParamsChangeGeneralCheckbox({generalCheckboxValue: isAllCheckboxesSelected}))
   }
 
-  dispatchGridParamsRemoveCheckboxColumn(): void {
+  public dispatchGridParamsRemoveCheckboxColumn(): void {
     this.store.dispatch(GridParamsRemoveCheckboxColumn());
   }
 
-  dispatchGridParamsAddCheckboxColumn(): void {
+  public dispatchGridParamsAddCheckboxColumn(): void {
     this.store.dispatch(GridParamsAddCheckboxColumn({
       checkboxColumn: {
         field: 'checkbox',

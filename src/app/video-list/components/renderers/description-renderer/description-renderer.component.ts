@@ -11,11 +11,11 @@ export class DescriptionRendererComponent implements ICellRendererAngularComp {
 
   public description: string;
 
-  agInit(params: ICellRendererParams): void {
+  public agInit(params: ICellRendererParams): void {
     this.description = params.value;
   }
 
-  refresh(params: any): boolean {
+  public refresh(): boolean {
     return false;
   }
 

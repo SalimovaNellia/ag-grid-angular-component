@@ -1,6 +1,6 @@
-import {DataState} from "./data.reducers";
-import {createSelector} from "@ngrx/store";
-import {AppState} from "../root/root.entity";
+import { AppState } from '../root/root.entity';
+import { createSelector } from '@ngrx/store';
+import { DataState } from './data.entity';
 
 const getDataState = (state: AppState) => state.data;
 
