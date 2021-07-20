@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 
 import { selectGeneralCheckboxValue } from '../../../store/grid-params/grid-params.selectors';
 import { AppState } from '../../../store/root/root.entity';
+import {checkIsAllRowsSelected} from "./utils/is-all-rows-selected.function";
 
 
 @Component({
@@ -27,7 +28,11 @@ export class CheckboxComponent implements IHeaderAngularComp, OnInit {
 
   agInit(params: IHeaderParams): void {
     this.gridApi = params.api;
-    this.allRowsSelectedToggle = this.gridApi.getSelectedRows().length === this.gridApi.getDisplayedRowCount();
+    this.allRowsSelectedToggle =
+      checkIsAllRowsSelected(
+        this.gridApi.getSelectedRows().length,
+        this.gridApi.getDisplayedRowCount()
+      )
   }
 
   refresh(params: IHeaderParams): boolean {
