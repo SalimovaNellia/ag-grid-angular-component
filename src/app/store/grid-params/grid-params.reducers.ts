@@ -1,4 +1,4 @@
-import { Action, createReducer, on} from "@ngrx/store";
+import { Action, createReducer, on} from '@ngrx/store';
 
 import { GRID_PARAMS_INITIAL_STATE } from './grid-params.config';
 import * as gridParamsActions from './grid-params.actions';

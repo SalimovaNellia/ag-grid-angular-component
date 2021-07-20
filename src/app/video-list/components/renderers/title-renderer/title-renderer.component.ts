@@ -14,9 +14,9 @@ export class TitleRendererComponent implements ICellRendererAngularComp {
   public videoTitle: string;
   public videoLink: string;
 
-  public agInit(params: ICellRendererParams): void {
-    this.videoTitle = params.value.title;
-    this.videoLink = YOUTUBE_BASE_LINK + params.value.videoId;
+  public agInit({value}: ICellRendererParams): void {
+    this.videoTitle = value.title;
+    this.videoLink = `${YOUTUBE_BASE_LINK}${value.videoId}`;
   }
 
   public refresh(): boolean {

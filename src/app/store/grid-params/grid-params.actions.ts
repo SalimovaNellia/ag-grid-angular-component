@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+
 import { IGridColumn } from './grid-params.entity';
 
 export const GridParamsAddColumnDefs = createAction(

@@ -3,7 +3,6 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveComponentModule } from '@ngrx/component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AgGridModule } from 'ag-grid-angular';
@@ -44,23 +43,15 @@ import { AppComponent } from './app.component';
       runtimeChecks: {
         strictActionImmutability: false,
         strictActionSerializability: false,
-        strictActionTypeUniqueness: false,
-        strictActionWithinNgZone: false,
         strictStateImmutability: false,
         strictStateSerializability: false,
       }
     }),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: environment.production, // Restrict extension to log-only mode
-      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
-    }),
-    ReactiveComponentModule,
     EffectsModule.forRoot([DataEffects]),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     BrowserAnimationsModule,
-    MatButtonToggleModule,
     FormsModule,
+    MatButtonToggleModule,
     MatCheckboxModule
   ],
   providers: [],

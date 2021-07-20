@@ -1,12 +1,15 @@
 import { GetContextMenuItemsParams, GridOptions, MenuItemDef } from 'ag-grid-community';
-import { Component, OnInit, Self } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy, OnInit, Self } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import 'ag-grid-enterprise';
 
+import { CUSTOM_TOGGLE_BUTTON_COMPONENT_KEY } from './components/toolbar/custom-toggle-button/custom-toggle-button.config';
+import { YOUTUBE_BASE_LINK } from './components/renderers/title-renderer/title-renderer.config';
 import { IGridColumn } from '../store/grid-params/grid-params.entity';
 import { EColumnId, VideoListItem } from '../shared /interfaces';
 import { VideoListService } from './services/video-list.service';
 import { gridOptionsConfig } from './video-list.config';
+import { takeUntil} from 'rxjs/operators';
 
 
 @Component({
@@ -15,12 +18,13 @@ import { gridOptionsConfig } from './video-list.config';
   styleUrls: ['./video-list.component.scss'],
   providers: [VideoListService]
 })
-export class VideoListComponent implements OnInit {
+export class VideoListComponent implements OnInit, OnDestroy {
 
   public gridOptions: GridOptions = gridOptionsConfig;
-
   public rowData$: Observable<VideoListItem[] | null>;
   public columnDefs$: Observable<IGridColumn[]>;
+
+  private unsubscribe$ = new Subject();
 
   constructor(@Self() private videoListService: VideoListService) {}
 
@@ -34,10 +38,9 @@ export class VideoListComponent implements OnInit {
   }
 
   public getSelectionMode(gridApi: any) {
-    const selectionMode$ = gridApi.getStatusPanel("customToggleButtonComponent")?.getFrameworkComponentInstance().selectionMode$;
-    selectionMode$?.subscribe((mode: string) => {
-      mode ? this.addCheckboxColumn() : this.removeCheckboxColumn();
-    });
+    gridApi.getStatusPanel(CUSTOM_TOGGLE_BUTTON_COMPONENT_KEY).getFrameworkComponentInstance().selectionMode$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((mode: boolean) => mode ? this.addCheckboxColumn() : this.removeCheckboxColumn());
   }
 
   private addCheckboxColumn(): void {
@@ -58,7 +61,7 @@ export class VideoListComponent implements OnInit {
       {
         name: 'Open in new tab',
         action: () => {
-          const url = `https://www.youtube.com/watch?v=${params.value.videoId}`;
+          const url = `${YOUTUBE_BASE_LINK}${params.value.videoId}`;
           window.open(url, '_blank');
         }
       }
@@ -67,4 +70,8 @@ export class VideoListComponent implements OnInit {
     return params.column.getColId() === EColumnId.VIDEO_TITLE ? menu : null;
   }
 
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 }

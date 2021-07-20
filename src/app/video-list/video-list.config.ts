@@ -1,7 +1,7 @@
 import { GridOptions } from 'ag-grid-community';
 
+import { CUSTOM_TOGGLE_BUTTON_COMPONENT_KEY } from './components/toolbar/custom-toggle-button/custom-toggle-button.config';
 import { CustomToggleButtonComponent } from './components/toolbar/custom-toggle-button/custom-toggle-button.component';
-
 
 export const gridOptionsConfig: GridOptions = {
   defaultColDef: {
@@ -15,7 +15,7 @@ export const gridOptionsConfig: GridOptions = {
   statusBar: {
     statusPanels: [
       {
-        statusPanel: "customToggleButtonComponent"
+        statusPanel: CUSTOM_TOGGLE_BUTTON_COMPONENT_KEY
       },
       {
         statusPanel: "agSelectedRowCountComponent"
@@ -26,7 +26,7 @@ export const gridOptionsConfig: GridOptions = {
     ],
   },
   frameworkComponents: {
-    customToggleButtonComponent: CustomToggleButtonComponent
+    [CUSTOM_TOGGLE_BUTTON_COMPONENT_KEY]: CustomToggleButtonComponent
   }
 };
 

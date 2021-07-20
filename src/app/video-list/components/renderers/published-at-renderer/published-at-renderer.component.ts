@@ -11,8 +11,8 @@ export class PublishedAtRendererComponent implements ICellRendererAngularComp {
 
   public publishedOn: string;
 
-  public agInit(params: ICellRendererParams): void {
-    this.publishedOn = params.value;
+  public agInit({value}: ICellRendererParams): void {
+    this.publishedOn = value;
   }
 
   public refresh(): boolean {

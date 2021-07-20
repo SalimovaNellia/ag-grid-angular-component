@@ -1,4 +1,1 @@
-export const ToggleParams = {
-  On: "On",
-  Off: "Off"
-}
+export const CUSTOM_TOGGLE_BUTTON_COMPONENT_KEY = "customToggleButtonComponent";

@@ -11,8 +11,8 @@ export class DescriptionRendererComponent implements ICellRendererAngularComp {
 
   public description: string;
 
-  public agInit(params: ICellRendererParams): void {
-    this.description = params.value;
+  public agInit({value}: ICellRendererParams): void {
+    this.description = value;
   }
 
   public refresh(): boolean {
