@@ -1,12 +1,12 @@
+import { GetContextMenuItemsParams, GridOptions, MenuItemDef } from 'ag-grid-community';
 import { Component, OnInit, Self } from '@angular/core';
-import { GridOptions } from 'ag-grid-community';
 import { Observable } from 'rxjs';
 import 'ag-grid-enterprise';
 
 import { IGridColumn } from '../store/grid-params/grid-params.entity';
+import { EColumnId, VideoListItem } from '../shared /interfaces';
 import { VideoListService } from './services/video-list.service';
 import { gridOptionsConfig } from './video-list.config';
-import { VideoListItem } from '../shared /interfaces';
 
 
 @Component({
@@ -52,4 +52,19 @@ export class VideoListComponent implements OnInit {
     const isAllCheckboxesSelected: boolean = event.api.getSelectedRows().length === event.api.getDisplayedRowCount();
     this.videoListService.dispatchChangeGeneralCheckbox(isAllCheckboxesSelected);
   }
+
+  public getContextMenuItems(params: GetContextMenuItemsParams): any {
+    const menu: MenuItemDef[] = [
+      {
+        name: 'Open in new tab',
+        action: () => {
+          const url = `https://www.youtube.com/watch?v=${params.value.videoId}`;
+          window.open(url, '_blank');
+        }
+      }
+    ];
+
+    return params.column.getColId() === EColumnId.VIDEO_TITLE ? menu : null;
+  }
+
 }

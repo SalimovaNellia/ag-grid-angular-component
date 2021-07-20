@@ -7,13 +7,6 @@ export interface ApiData {
   items: VideoItemFromApi[];
 }
 
-export interface IVideo {
-  etag: string,
-  id: IVideoId,
-  kind: string,
-  snippet: ISnippet,
-}
-
 export interface VideoListItem {
   checkbox?: boolean;
   thumbnail: IThumbnailParams;
@@ -65,4 +58,12 @@ export interface VideoItemFromApi {
   etag: string;
   id: IVideoId;
   snippet: ISnippet;
+}
+
+export enum EColumnId {
+  CHECKBOX = 'checkbox',
+  THUMBNAIL = 'thumbnail',
+  PUBLISHED_ON = 'publishedOn',
+  VIDEO_TITLE = 'videoTitle',
+  DESCRIPTION = 'description'
 }
